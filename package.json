@@ -1,0 +1,35 @@
+{
+  "name": "portaldigital",
+  "version": "4.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "pkg . --targets node18-win-x64 --output portal-ultra.exe"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "body-parser": "^2.2.2",
+    "exceljs": "^4.4.0",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "fs": "^0.0.1-security",
+    "puppeteer": "^24.40.0",
+    "xlsx": "^0.18.5"
+  },
+  "bin": "src/index.js",
+  "pkg": {
+    "assets": [
+      "public/**/*",
+      "src/views/**/*",
+      "src/excel/*.xlsx",
+      "node_modules/puppeteer/.local-chromium/**/*",
+      "node_modules/node-hide-console-window/bin/win32-x64/node_hide_console_window.node"
+    ],
+    "targets": [
+      "node18-win-x64"
+    ]
+  }
+}

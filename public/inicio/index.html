@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Início | Portal Ultra SEGES</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;600;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #0047AB;
+            --primary-red: #D32F2F;
+            --glow-blue: rgba(0, 71, 171, 0.6);
+            --glow-red: rgba(211, 47, 47, 0.6);
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            background: #020617;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        /* --- AURORA BACKGROUND --- */
+        .aurora-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            filter: blur(100px);
+            opacity: 0.6;
+        }
+
+        .blob {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            animation: move 20s infinite alternate;
+        }
+
+        .blob-1 { background: var(--primary-blue); top: -10%; left: -10%; }
+        .blob-2 { background: var(--primary-red); bottom: -10%; right: -10%; }
+        .blob-3 { background: #4f46e5; top: 40%; left: 30%; }
+
+        @keyframes move {
+            from { transform: translate(0, 0) scale(1); }
+            to { transform: translate(200px, 100px) scale(1.2); }
+        }
+
+        /* --- LOGOS --- */
+        .header-logos {
+            position: absolute;
+            top: 40px;
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .logo-wrapper {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            padding: 12px;
+            border-radius: 18px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .logo-wrapper img { height: 50px; filter: brightness(1.1); }
+
+        /* --- TEXTOS --- */
+        .welcome-text { text-align: center; margin-bottom: 40px; z-index: 2; }
+        .welcome-text h1 {
+            font-size: 40px;
+            font-weight: 800;
+            background: linear-gradient(to bottom, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .welcome-text p {
+            color: #94a3b8; letter-spacing: 2px;
+            text-transform: uppercase; font-size: 12px; margin-top: 5px;
+        }
+
+        /* --- CARDS --- */
+        .menu-container {
+            display: flex; gap: 25px; z-index: 2;
+            width: 100%; max-width: 900px; padding: 20px;
+        }
+
+        .menu-card {
+            flex: 1; background: var(--glass);
+            backdrop-filter: blur(40px); border: 1px solid var(--glass-border);
+            padding: 50px 30px; border-radius: 35px;
+            text-align: center; cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            text-decoration: none; display: flex;
+            flex-direction: column; align-items: center; justify-content: center;
+        }
+
+        .card-disabled {
+            pointer-events: none; filter: grayscale(1) blur(1px);
+            opacity: 0.5; cursor: wait; animation: pulse-loading 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse-loading {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        .card-diarios:not(.card-disabled):hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: var(--primary-blue); box-shadow: 0 25px 60px var(--glow-blue);
+        }
+
+        .card-frequencia:not(.card-disabled):hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: var(--primary-red); box-shadow: 0 25px 60px var(--glow-red);
+        }
+
+        .card-icon { font-size: 50px; margin-bottom: 20px; transition: 0.5s; }
+        .menu-card:hover .card-icon { transform: scale(1.2) rotate(5deg); }
+
+        .menu-card h2 { font-size: 24px; font-weight: 700; color: white; margin-bottom: 10px; }
+        .menu-card p { font-size: 14px; color: #94a3b8; line-height: 1.5; }
+
+        .badge-status {
+            margin-top: 15px; background: rgba(255, 255, 255, 0.05);
+            padding: 6px 15px; border-radius: 100px;
+            font-size: 11px; font-weight: 600; letter-spacing: 1px;
+            text-transform: uppercase; border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* --- BOTÕES DE AÇÃO --- */
+        .footer-actions {
+            position: absolute; bottom: 80px;
+            display: flex; gap: 15px; z-index: 10;
+        }
+
+        .action-btn {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            color: #94a3b8;
+            padding: 12px 28px;
+            border-radius: 100px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 800;
+            transition: 0.3s;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .reset-btn:hover {
+            color: white; border-color: var(--primary-blue);
+            background: rgba(0, 71, 171, 0.3);
+            box-shadow: 0 0 20px var(--glow-blue);
+        }
+
+        .logout-btn:hover {
+            color: white; border-color: var(--primary-red);
+            background: rgba(211, 47, 47, 0.3);
+            box-shadow: 0 0 20px var(--glow-red);
+        }
+
+        footer {
+            position: absolute; bottom: 30px; font-size: 11px;
+            opacity: 0.4; text-transform: uppercase; letter-spacing: 2px;
+        }
+
+        @media (max-width: 768px) {
+            .menu-container { flex-direction: column; padding: 20px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="aurora-container">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <header class="header-logos">
+        <div class="logo-wrapper">
+            <img src="https://cdn.es.gov.br/images/logo/governo/brasao/center/Brasao_Governo.png" alt="Governo">
+        </div>
+        <div class="logo-wrapper">
+            <img src="/img/2.png" alt="Mário Gurgel">
+        </div>
+        <div class="logo-wrapper">
+            <img src="/img/1.png" alt="Escola do Futuro">
+        </div>
+    </header>
+
+    <div class="welcome-text">
+        <p>Painel de Controle</p>
+        <h1>Bem-vindo, tudo bem?</h1>
+    </div>
+
+    <main class="menu-container">
+        <a href="/diarios" class="menu-card card-diarios card-disabled" id="linkDiario">
+            <span class="card-icon">📒</span>
+            <h2>Diários</h2>
+            <p>Verificar quais diários estão pendentes ou sem dados migrados.</p>
+            <div class="badge-status" id="badgeDiario" style="color: #94a3b8;">Sincronizando...</div>
+        </a>
+
+        <a href="/frequencia" class="menu-card card-frequencia card-disabled" id="linkFreq">
+            <span class="card-icon">📅</span>
+            <h2>Frequência</h2>
+            <p>Analisar frequência mensal das turmas e identificar faltas não lançadas.</p>
+            <div class="badge-status" id="badgeFreq" style="color: #94a3b8;">Aguardando...</div>
+        </a>
+    </main>
+
+    <div class="footer-actions">
+        <button onclick="resetarDados()" class="action-btn reset-btn">RESETAR DADOS</button>
+        <a href="/logout" class="action-btn logout-btn">ENCERRAR SESSÃO</a>
+    </div>
+
+    <footer>
+        EEEM Mário Gurgel • Terminal de Gestão v4.0
+    </footer>
+
+    <script>
+        // --- FUNÇÃO DE RESET ---
+        async function resetarDados() {
+            if (!confirm("⚠️ ATENÇÃO: Deseja apagar todos os dados atuais e iniciar uma nova coleta do SEGES?")) return;
+
+            try {
+                const response = await fetch('/api/reset', { method: 'GET' });
+                const data = await response.json();
+                if (data.success) {
+                    alert("✅ Reset iniciado! O robô voltará a coletar as turmas agora.");
+                    window.location.reload();
+                }
+            } catch (err) {
+                console.error("Erro ao resetar:", err);
+                alert("Falha ao comunicar com o servidor.");
+            }
+        }
+
+        // --- VERIFICAÇÃO AUTOMÁTICA DE DADOS ---
+        async function verificarDados() {
+            try {
+                const response = await fetch('/api/turmas');
+                const dados = await response.json();
+
+                const cardDiario = document.getElementById('linkDiario');
+                const cardFreq = document.getElementById('linkFreq');
+                const badgeDiario = document.getElementById('badgeDiario');
+                const badgeFreq = document.getElementById('badgeFreq');
+
+                // Se existem turmas, habilita os cards
+                if (dados.turmas && dados.turmas.length > 0) {
+                    cardDiario.classList.remove('card-disabled');
+                    cardFreq.classList.remove('card-disabled');
+
+                    // Status Diários
+                    if (dados.statusDiario === "Finalizado") {
+                        badgeDiario.innerText = "Concluído";
+                        badgeDiario.style.color = "#10b981"; // Verde
+                    } else if (dados.statusDiario === "Coletando...") {
+                        badgeDiario.innerText = "Sincronizando...";
+                        badgeDiario.style.color = "#f59e0b"; // Laranja
+                    } else {
+                        badgeDiario.innerText = "Verificar Pendências";
+                        badgeDiario.style.color = "#ef4444"; // Vermelho
+                    }
+
+                    // Status Frequência
+                    if (dados.statusFrequencia === "Finalizado") {
+                        badgeFreq.innerText = "Concluído";
+                        badgeFreq.style.color = "#10b981"; // Verde
+                    } else if (dados.statusFrequencia === "Coletando...") {
+                        badgeFreq.innerText = "Analisando...";
+                        badgeFreq.style.color = "#f59e0b"; // Laranja
+                    } else {
+                        badgeFreq.innerText = "Análise Mensal";
+                        badgeFreq.style.color = "#ef4444"; // Vermelho
+                    }
+                } else {
+                    // Sem turmas = Aguardando robô
+                    cardDiario.classList.add('card-disabled');
+                    cardFreq.classList.add('card-disabled');
+                    badgeDiario.innerText = "Aguardando Robô...";
+                    badgeFreq.innerText = "Aguardando Robô...";
+                }
+            } catch (error) {
+                console.error("Erro API:", error);
+            }
+        }
+
+        // --- PING COM WEB WORKER (NUNCA DORME) ---
+        const pingWorkerBlob = new Blob([`
+            setInterval(() => self.postMessage('ping'), 4000);
+        `], { type: 'text/javascript' });
+        const worker = new Worker(URL.createObjectURL(pingWorkerBlob));
+        worker.onmessage = () => fetch('/api/ping', { keepalive: true }).catch(() => {});
+
+        // Inicia monitoramento
+        setInterval(verificarDados, 2000);
+        verificarDados();
+
+        // Evita suspensão de aba tocando áudio silencioso ao primeiro clique
+        document.addEventListener('click', () => {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            gain.gain.value = 0;
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start();
+        }, { once: true });
+    </script>
+</body>
+</html>
