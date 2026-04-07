@@ -151,7 +151,7 @@ setInterval(() => {
 
 function startServer() {
     return new Promise(resolve => {
-        const s = app.listen(port, () => resolve(s));
+        const s = app.listen(port, '127.0.0.1', () => resolve(s));
     });
 }
 
