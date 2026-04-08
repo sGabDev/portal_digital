@@ -3,7 +3,7 @@
 Automação de alta performance para análise de frequências e diários escolares.
 
 O **Portal Digital** é uma solução independente desenvolvida para otimizar o fluxo de trabalho pedagógico na **EEEM Mário Gurgel (SRE Vila Velha - Sedu/ES)**.  
-Através de **RPA (Robotic Process Automation)**, o sistema automatiza a conferência manual de diários e frequências no sistema **SEGES**, transformando horas de conferência em segundos de processamento.
+Através de **RPA (Robotic Process Automation)**, o sistema automatiza a conferência manual de diários e frequências atrasadas no sistema **SEGES**, transformando horas de conferência em segundos de processamento.
 
 ---
 
