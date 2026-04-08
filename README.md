@@ -94,8 +94,7 @@ Este projeto está licenciado sob a **GNU General Public License v3 (GPL-3.0)**.
 ## 👤 Autor
 
 - **Desenvolvido por:** Gabriel Souza Paula (sGabDev)  
-- **Escola:** EEEM Mário Gurgel  
-- **Versão:** 4.0 "Ultra"  
+- **Versão:** 4.0
 
 ---
 
