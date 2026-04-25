@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portal Ultra | Seleção de Acesso</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;600;800&display=swap"
+        rel="stylesheet" />
+    <style>
+        :root {
+            --primary-blue: #0047ab;
+            --primary-red: #d32f2f;
+            --glow-blue: rgba(0, 71, 171, 0.6);
+            --glow-red: rgba(211, 47, 47, 0.6);
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --success-green: #059669;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Plus Jakarta Sans", sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            background: #020617;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        /* Efeito Aurora de Fundo */
+        .aurora-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            filter: blur(100px);
+            opacity: 0.6;
+        }
+
+        .blob {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            animation: move 20s infinite alternate;
+        }
+
+        .blob-1 {
+            background: var(--primary-blue);
+            top: -10%;
+            left: -10%;
+            animation-duration: 25s;
+        }
+
+        .blob-2 {
+            background: var(--primary-red);
+            bottom: -10%;
+            right: -10%;
+            animation-duration: 30s;
+        }
+
+        .blob-3 {
+            background: #4f46e5;
+            top: 40%;
+            left: 30%;
+            animation-duration: 20s;
+        }
+
+        @keyframes move {
+            from {
+                transform: translate(0, 0) scale(1);
+            }
+
+            to {
+                transform: translate(200px, 100px) scale(1.2);
+            }
+        }
+
+        /* Logos superiores */
+        .header-logos {
+            position: absolute;
+            top: 40px;
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .logo-wrapper {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            padding: 15px;
+            border-radius: 20px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .logo-wrapper img {
+            height: 50px;
+            filter: brightness(1.1);
+        }
+
+        /* Card Principal */
+        .selection-card {
+            background: var(--glass);
+            backdrop-filter: blur(40px);
+            border: 1px solid var(--glass-border);
+            padding: 50px 40px;
+            border-radius: 40px;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: linear-gradient(to bottom, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p.subtitle {
+            color: #94a3b8;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        /* Estilização das caixas de Seleção Estilo Cyberpunk */
+        .select-group {
+            text-align: left;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        label {
+            color: #64748b;
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-left: 10px;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .custom-select {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--glass-border);
+            padding: 18px;
+            border-radius: 20px;
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 20px center;
+            background-size: 16px;
+        }
+
+        .custom-select:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 20px var(--glow-blue);
+        }
+
+        .custom-select:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        /* Botão Confirmar */
+        button {
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(135deg,
+                    var(--primary-red),
+                    #ff1f1f);
+            border: none;
+            border-radius: 20px;
+            color: white;
+            font-weight: 800;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.4s;
+            box-shadow: 0 10px 30px var(--glow-red);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 35px;
+        }
+
+        button:hover:not(:disabled) {
+            filter: brightness(1.2);
+            transform: scale(1.02);
+        }
+
+        button:disabled {
+            background: #1e293b;
+            color: #475569;
+            box-shadow: none;
+            cursor: not-allowed;
+        }
+
+        /* TELA DE CARREGAMENTO (SKELETON / GLASS OVERLAY) */
+        .loading-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(2, 6, 23, 0.85);
+            backdrop-filter: blur(15px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .loading-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top: 3px solid var(--primary-blue);
+            border-right: 3px solid var(--primary-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            filter: drop-shadow(0 0 10px var(--glow-blue));
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-text {
+            margin-top: 20px;
+            font-weight: 600;
+            font-size: 14px;
+            color: #94a3b8;
+            letter-spacing: 1px;
+        }
+
+        /* Rodapé */
+        footer {
+            position: absolute;
+            bottom: 30px;
+            font-size: 11px;
+            opacity: 0.4;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Fundo Aurora -->
+    <div class="aurora-container">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- Logos -->
+    <header class="header-logos">
+        <div class="logo-wrapper">
+            <img src="https://cdn.es.gov.br/images/logo/governo/brasao/center/Brasao_Governo.png" alt="Governo" />
+        </div>
+        <div class="logo-wrapper">
+            <img src="/img/2.png" alt="Mário Gurgel" />
+        </div>
+        <div class="logo-wrapper">
+            <img src="/img/1.png" alt="Escola do Futuro" />
+        </div>
+    </header>
+
+    <!-- Card de Seleção -->
+    <main class="selection-card">
+        <!-- Tela de Carregamento Interna -->
+        <div class="loading-overlay" id="loadingOverlay">
+            <div class="spinner"></div>
+            <div class="loading-text" id="loadingText">
+                Buscando dados no servidor...
+            </div>
+        </div>
+
+        <h1>Identificação de Acesso</h1>
+        <p class="subtitle">
+            Selecione a unidade e o ano letivo para prosseguir
+        </p>
+
+        <!-- Seleção de Escola -->
+        <div class="select-group">
+            <label for="escolaSelect">Unidade Escolar</label>
+            <select id="escolaSelect" class="custom-select" onchange="buscarAnos()">
+                <option value="" disabled selected>
+                    Selecione uma escola...
+                </option>
+                <!-- Preenchido via API -->
+            </select>
+        </div>
+
+        <!-- Seleção de Ano -->
+        <div class="select-group">
+            <label for="anoSelect">Ano Letivo</label>
+            <select id="anoSelect" class="custom-select" disabled onchange="validarSelecao()">
+                <option value="" disabled selected>
+                    Aguardando escola...
+                </option>
+                <!-- Preenchido via API após selecionar a escola -->
+            </select>
+        </div>
+
+        <!-- Botão Confirmar -->
+        <button id="btnConfirmar" disabled onclick="confirmarAcesso()">
+            <span>CONFIRMAR E ACESSAR</span>
+        </button>
+    </main>
+
+    <footer>EEEM Mário Gurgel • Security Protocol v4.0</footer>
+
+    <script>
+        const escolaSelect = document.getElementById("escolaSelect");
+        const anoSelect = document.getElementById("anoSelect");
+        const btnConfirmar = document.getElementById("btnConfirmar");
+        const loadingOverlay = document.getElementById("loadingOverlay");
+        const loadingText = document.getElementById("loadingText");
+
+        function toggleLoading(
+            active,
+            text = "Buscando dados no servidor...",
+        ) {
+            loadingText.innerText = text;
+            if (active) {
+                loadingOverlay.classList.add("active");
+            } else {
+                loadingOverlay.classList.remove("active");
+            }
+        }
+
+        async function carregarEscolas() {
+            toggleLoading(true, "Carregando escolas autorizadas...");
+            try {
+                const response = await fetch("/api/escolas");
+                const escolas = await response.json();
+
+                escolaSelect.innerHTML =
+                    '<option value="" disabled selected>Selecione uma escola...</option>';
+                escolas.forEach((escola) => {
+                    const option = document.createElement("option");
+                    option.value = escola.id;
+                    option.text = escola.nome;
+                    escolaSelect.appendChild(option);
+                });
+            } catch (error) {
+                alert("Erro ao carregar escolas. Tente novamente.");
+                console.error(error);
+            } finally {
+                toggleLoading(false);
+            }
+        }
+
+        async function buscarAnos() {
+            const escolaId = escolaSelect.value;
+            if (!escolaId) return;
+
+            anoSelect.disabled = true;
+            anoSelect.innerHTML =
+                '<option value="" disabled selected>Carregando anos...</option>';
+            btnConfirmar.disabled = true;
+
+            toggleLoading(true, "Buscando anos letivos desta escola...");
+
+            try {
+                const response = await fetch(
+                    `/api/anos?escolaId=${escolaId}`,
+                );
+                const anos = await response.json();
+
+                anoSelect.innerHTML =
+                    '<option value="" disabled selected>Selecione o ano...</option>';
+
+                anos.forEach((ano) => {
+                    const option = document.createElement("option");
+                    option.value = ano.id;
+                    option.text = `${ano.ano}`;
+                    anoSelect.appendChild(option);
+                });
+
+                anoSelect.disabled = false;
+            } catch (error) {
+                alert("Erro ao buscar os anos letivos.");
+                anoSelect.innerHTML =
+                    '<option value="" disabled selected>Erro ao carregar</option>';
+            } finally {
+                toggleLoading(false);
+            }
+        }
+
+        function validarSelecao() {
+            if (escolaSelect.value && anoSelect.value) {
+                btnConfirmar.disabled = false;
+                btnConfirmar.style.background =
+                    "linear-gradient(135deg, #059669, #10b981)";
+                btnConfirmar.style.boxShadow =
+                    "0 10px 30px rgba(5, 150, 105, 0.4)";
+            } else {
+                btnConfirmar.disabled = true;
+            }
+        }
+
+        async function confirmarAcesso() {
+            const dadosAcesso = {
+                escolaId: escolaSelect.value,
+                ano: anoSelect.value,
+                escola: escolaSelect.text,
+                anoletivo: anoSelect.text,
+            };
+
+            toggleLoading(true, "Autenticando ambiente...");
+
+            try {
+                const response = await fetch("/api/seletor", {
+                    method: "POST",
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(dadosAcesso),
+                });
+                console.log(response);
+                const data = await response.json();
+
+                if (data.success) {
+                    toggleLoading(
+                        true,
+                        "Acesso Permitido! Redirecionando...",
+                    );
+                    setTimeout(() => {
+                        window.location.href = "/inicio";
+                    }, 1500);
+                } else {
+                    throw new Error("Erro ao salvar acesso");
+                }
+            } catch (error) {
+                console.log(error);
+                alert("Erro ao confirmar acesso. Tente novamente.");
+                toggleLoading(false);
+            }
+        }
+
+        window.onload = carregarEscolas;
+    </script>
+</body>
+
+</html>
